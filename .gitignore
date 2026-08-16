@@ -1,0 +1,12 @@
+# Gradle and Kotlin build output
+.gradle/
+.kotlin/
+build/
+out/
+
+# IntelliJ IDEA project-local files
+.idea/
+*.iml
+
+# Local editor logs
+/nvim.log
