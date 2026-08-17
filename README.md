@@ -23,7 +23,7 @@ Run every problem's tests:
 Run one problem's tests:
 
 ```shell
-./gradlew test --tests 'leetcode.p1768.MergeStringsAlternatelyTest'
+./gradlew test --tests 'leetcode.p1071.GreatestCommonDivisorOfStringsTest'
 ```
 
 Rerun tests automatically while editing:
@@ -32,8 +32,8 @@ Rerun tests automatically while editing:
 ./gradlew test --continuous
 ```
 
-Problem 1768 intentionally starts with a `TODO`, so its three example tests are
-red until `mergeAlternately` is implemented.
+Problem 1071 intentionally starts with a `TODO`, so its example tests are red
+until `gcdOfStrings` is implemented.
 
 ## Add a problem
 
