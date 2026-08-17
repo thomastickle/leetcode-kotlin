@@ -2,6 +2,13 @@
 
 A Kotlin/JVM project for solving LeetCode problems with local JUnit tests.
 
+## Solved problems
+
+| Problem | Solution | Tests |
+| --- | --- | --- |
+| [1071. Greatest Common Divisor of Strings](https://leetcode.com/problems/greatest-common-divisor-of-strings/) | [`GreatestCommonDivisorOfStrings.kt`](src/main/kotlin/leetcode/p1071/GreatestCommonDivisorOfStrings.kt) | [`GreatestCommonDivisorOfStringsTest.kt`](src/test/kotlin/leetcode/p1071/GreatestCommonDivisorOfStringsTest.kt) |
+| [1768. Merge Strings Alternately](https://leetcode.com/problems/merge-strings-alternately/) | [`MergeStringsAlternately.kt`](src/main/kotlin/leetcode/p1768/MergeStringsAlternately.kt) | [`MergeStringsAlternatelyTest.kt`](src/test/kotlin/leetcode/p1768/MergeStringsAlternatelyTest.kt) |
+
 ## Toolchain
 
 - Kotlin 2.4.10
@@ -11,6 +18,9 @@ A Kotlin/JVM project for solving LeetCode problems with local JUnit tests.
 
 The build requires a Java 25 JDK. Use the wrapper for every Gradle command so the
 project does not depend on a system Gradle installation.
+
+For IntelliJ IDEA, open the repository root as a Gradle project and select a
+Java 25 JDK as the Gradle JVM.
 
 ## Run tests
 
@@ -31,9 +41,6 @@ Rerun tests automatically while editing:
 ```shell
 ./gradlew test --continuous
 ```
-
-Problem 1071 intentionally starts with a `TODO`, so its example tests are red
-until `gcdOfStrings` is implemented.
 
 ## Add a problem
 
