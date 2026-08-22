@@ -9,6 +9,33 @@ The human developer is responsible for designing and implementing the
 solutions. Agent assistance should support the development process without
 taking over the problem-solving exercise unless explicitly requested.
 
+## Problem Setup Tasks
+
+When the user asks to "set up LeetCode problem `<number>`" or uses equivalent
+wording, treat the request as a combined scaffolding task. Complete all of the
+following:
+
+1. Create the production file in a zero-padded problem package such as
+   `leetcode.p0392`, using the problem title for the filename.
+2. Add LeetCode's `class Solution` and public method signature, but leave the
+   algorithm unimplemented with `TODO("Implement solution")`.
+3. Add a self-contained KDoc comment immediately before `class Solution`. The
+   KDoc must include all substantive information from the LeetCode description:
+   the problem number and title, the complete task, definitions and rules,
+   every example with its input and output, all constraints, any follow-up
+   question, and a link to the canonical LeetCode problem page. Paraphrase
+   prose where appropriate, but preserve every detail needed to understand and
+   solve the problem without reopening the web page.
+4. Create the matching JUnit test file in the mirrored test package.
+5. Include the examples from the problem statement and relevant boundary or
+   distinguishing cases using explicit expected results.
+6. Run the smallest relevant test command and report the expected failure from
+   the unimplemented solution skeleton.
+
+A problem-setup task is not a request to implement the algorithm. If either
+file already exists, preserve the developer's work and add only the missing
+setup pieces without replacing or correcting an implementation.
+
 ## Most Important Rule
 
 When asked to create, update, generate, or configure tests:
