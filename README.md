@@ -2,13 +2,6 @@
 
 A Kotlin/JVM project for solving LeetCode problems with local JUnit tests.
 
-## Solved problems
-
-| Problem | Solution | Tests |
-| --- | --- | --- |
-| [1071. Greatest Common Divisor of Strings](https://leetcode.com/problems/greatest-common-divisor-of-strings/) | [`GreatestCommonDivisorOfStrings.kt`](src/main/kotlin/leetcode/p1071/GreatestCommonDivisorOfStrings.kt) | [`GreatestCommonDivisorOfStringsTest.kt`](src/test/kotlin/leetcode/p1071/GreatestCommonDivisorOfStringsTest.kt) |
-| [1768. Merge Strings Alternately](https://leetcode.com/problems/merge-strings-alternately/) | [`MergeStringsAlternately.kt`](src/main/kotlin/leetcode/p1768/MergeStringsAlternately.kt) | [`MergeStringsAlternatelyTest.kt`](src/test/kotlin/leetcode/p1768/MergeStringsAlternatelyTest.kt) |
-
 ## Toolchain
 
 - Kotlin 2.4.10
@@ -40,6 +33,19 @@ Rerun tests automatically while editing:
 
 ```shell
 ./gradlew test --continuous
+```
+
+## Continuous integration
+
+The GitHub Actions workflow builds the project and runs every test with Java 25
+on pushes, pull requests, and manual runs. Successful runs also publish a job
+summary with progress for all repository problems, LeetCode 75, and Top
+Interview 150.
+
+Generate the same progress summary locally:
+
+```shell
+bash scripts/problem-progress.sh
 ```
 
 ## Add a problem
