@@ -1,7 +1,5 @@
 package leetcode.p0735
 
-import java.util.*
-
 /**
  * # 735. Asteroid Collision
  *
@@ -57,4 +55,36 @@ class Solution {
         }
         return output.toIntArray()
     }
+
+
+//    fun asteroidCollision(asteroids: IntArray): IntArray {
+//
+//        var size = 0
+//
+//        for (asteroid in asteroids) {
+//            var destroyed = false
+//
+//            while (size > 0 && asteroid < 0 && asteroids[size - 1] > 0) {
+//                val collisionSum = asteroids[size - 1] + asteroid
+//
+//                if (collisionSum == 0) {
+//                    size--
+//                    destroyed = true
+//                    break
+//                } else if (collisionSum < 0) {
+//                    size--
+//                } else {
+//                    destroyed = true
+//                    break
+//                }
+//            }
+//
+//            if (!destroyed) {
+//                asteroids[size] = asteroid
+//                size++
+//            }
+//        }
+//
+//        return asteroids.copyOf(size)
+//    }
 }
