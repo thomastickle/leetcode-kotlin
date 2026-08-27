@@ -23,18 +23,34 @@ class ListNode(var `val`: Int) {
  * [LeetCode 206: Reverse Linked List](https://leetcode.com/problems/reverse-linked-list/)
  */
 class Solution {
-    fun reverseList(head: ListNode?): ListNode? {
+    fun reverseListIterative(head: ListNode?): ListNode? {
+        var previous: ListNode? = null
+        var current: ListNode? = head
+
+        while (current != null) {
+            val nextNode = current.next
+            current.next = previous
+            previous = current
+            current = nextNode
+        }
+        return previous
+    }
+
+    fun reverseListRecursive(head: ListNode?): ListNode? {
         tailrec fun reverse(current: ListNode?, previous: ListNode?): ListNode? {
-            if (current == null ) {
+            if (current == null) {
                 return previous
             }
 
             val next = current.next
             current.next = previous
-
             return reverse(next, current)
         }
 
         return reverse(head, null)
+    }
+
+    fun reverseList(head: ListNode?): ListNode? {
+        return reverseListIterative(head)
     }
 }
