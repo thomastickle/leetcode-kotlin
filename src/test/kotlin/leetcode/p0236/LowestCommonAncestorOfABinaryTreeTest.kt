@@ -14,13 +14,11 @@ class LowestCommonAncestorOfABinaryTreeTest {
         var index = 1
         while (index < values.size && queue.isNotEmpty()) {
             val current = queue.removeFirst()
-            if (index < values.size) {
-                val leftVal = values[index++]
-                if (leftVal != null) {
-                    val leftNode = TreeNode(leftVal)
-                    current.left = leftNode
-                    queue.add(leftNode)
-                }
+            val leftVal = values[index++]
+            if (leftVal != null) {
+                val leftNode = TreeNode(leftVal)
+                current.left = leftNode
+                queue.add(leftNode)
             }
             if (index < values.size) {
                 val rightVal = values[index++]
