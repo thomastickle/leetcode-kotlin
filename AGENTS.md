@@ -31,6 +31,13 @@ following:
    distinguishing cases using explicit expected results.
 6. Run the smallest relevant test command and report the expected failure from
    the unimplemented solution skeleton.
+7. After the scaffold is created and the relevant test command has been run,
+   make a dedicated Git commit for the not-yet-implemented setup. Stage only
+   files changed for that problem setup, preserve any existing developer work,
+   and keep `TODO("Implement solution")` in the solution. Use the exact
+   searchable commit message `Setup LeetCode <number>: <Title>`, replacing the
+   placeholders with the problem's number and title and adding no free-form
+   suffix.
 
 A problem-setup task is not a request to implement the algorithm. If either
 file already exists, preserve the developer's work and add only the missing
