@@ -27,6 +27,26 @@ package leetcode.p0216
  */
 class Solution {
     fun combinationSum3(k: Int, n: Int): List<List<Int>> {
-        TODO("Implement solution")
+        val output = mutableListOf<List<Int>>()
+
+
+        fun compute(start: Int, values: MutableList<Int>, remains: Int) {
+            if ((values.size == k && remains != 0) || (remains == 0 && values.size != k)) return
+            if (values.size == k) {
+                output.add(ArrayList(values))
+                return
+            }
+
+            for (i in start..9) {
+                if (i > remains) break
+                values.add(i)
+                compute(i + 1, values, remains - i)
+                values.removeAt(values.size - 1)
+            }
+        }
+
+        compute(1, mutableListOf<Int>(), n)
+
+        return output
     }
 }
