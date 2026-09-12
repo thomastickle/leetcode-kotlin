@@ -31,6 +31,37 @@ package leetcode.p0017
  */
 class Solution {
     fun letterCombinations(digits: String): List<String> {
-        TODO("Implement solution")
+        fun mapDigit(digit: Char): String {
+            return when (digit) {
+                '2' -> "abc"
+                '3' -> "def"
+                '4' -> "ghi"
+                '5' -> "jkl"
+                '6' -> "mno"
+                '7' -> "pqrs"
+                '8' -> "tuv"
+                else -> "wxyz"
+            }
+        }
+
+        val output = mutableListOf<String>()
+
+        fun computeString(digits: String, currentString: StringBuilder) {
+            val currentLength = currentString.length
+            if (currentLength == digits.length) {
+                output.add(currentString.toString())
+                return
+            }
+
+            for (character in mapDigit(digits[currentLength])) {
+                currentString.append(character)
+                computeString(digits, currentString)
+                currentString.delete(currentString.length - 1, currentString.length)
+            }
+        }
+
+        computeString(digits, StringBuilder())
+
+        return output
     }
 }
