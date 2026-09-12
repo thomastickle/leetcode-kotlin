@@ -31,6 +31,19 @@ package leetcode.p0875
  */
 class Solution {
     fun minEatingSpeed(piles: IntArray, h: Int): Int {
-        TODO("Implement solution")
+        var low = 1L
+        var high = piles.max().toLong()
+
+        while (low < high) {
+            val speed = low + (high - low) / 2
+            val hoursNeeded = piles.sumOf { pile -> (pile - 1) / speed + 1 }
+            if (hoursNeeded <= h) {
+                high = speed
+            } else {
+                low = speed + 1
+            }
+        }
+
+        return high.toInt()
     }
 }
