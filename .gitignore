@@ -10,3 +10,6 @@ out/
 
 # Local editor logs
 /nvim.log
+
+# Junie local session artifacts
+.junie/
