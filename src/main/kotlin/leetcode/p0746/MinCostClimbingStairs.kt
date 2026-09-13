@@ -1,5 +1,4 @@
 package leetcode.p0746
-
 /**
  * # 746. Min Cost Climbing Stairs
  *
@@ -25,6 +24,22 @@ package leetcode.p0746
  */
 class Solution {
     fun minCostClimbingStairs(cost: IntArray): Int {
-        TODO("Implement solution")
+        tailrec fun minClimbCost(index: Int, oneBack: Int, twoBack: Int): Int {
+            if (index == cost.size) {
+                return minOf(oneBack, twoBack)
+            }
+            val next = minOf(oneBack, twoBack)
+            return minClimbCost(index+1, cost[index] + next, oneBack)
+        }
+        return minClimbCost(2, cost[1], cost[0])
+
+//        var oneBack = cost[1]
+//        var twoBack = cost[0]
+//        for (i in 2 until cost.size) {
+//            val next = cost[i] + minOf(oneBack, twoBack)
+//            twoBack = oneBack
+//            oneBack = next
+//        }
+//        return minOf(oneBack, twoBack)
     }
 }
