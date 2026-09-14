@@ -24,6 +24,20 @@ package leetcode.p0198
  */
 class Solution {
     fun rob(nums: IntArray): Int {
-        TODO("Implement solution")
+        if (nums.size == 1) return nums[0]
+
+        tailrec fun robHouses(index: Int, oneBackCash: Int, twoBackCash: Int): Int {
+            if (index == nums.size) {
+                return maxOf(oneBackCash, twoBackCash)
+            }
+
+            val current = maxOf(oneBackCash, nums[index] + twoBackCash)
+
+            return robHouses(index + 1, current, oneBackCash)
+        }
+
+        val oneBackCash = maxOf(nums[0], nums[1])
+
+        return robHouses(2, oneBackCash, nums[0])
     }
 }
