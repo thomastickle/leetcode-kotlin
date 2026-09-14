@@ -33,6 +33,32 @@ package leetcode.p0748
  */
 class Solution {
     fun shortestCompletingWord(licensePlate: String, words: Array<String>): String {
-        TODO("Implement solution")
+        val required = IntArray(26).apply {
+            licensePlate.forEach { char ->
+                if (char.isLetter()) {
+                    this[char.lowercaseChar() - 'a']++
+                }
+            }
+        }
+
+        var shortestWord: String? = null
+        wordsIterating@ for (word in words) {
+            if (shortestWord != null && shortestWord.length <= word.length) {
+                continue
+            }
+
+            val counts = IntArray(26).apply {
+                word.forEach { char ->
+                    this[char- 'a']++
+                }
+            }
+
+            for (index in required.indices) {
+                if (counts[index] < required[index]) continue@wordsIterating
+            }
+
+            shortestWord = word
+        }
+        return shortestWord!!
     }
 }
