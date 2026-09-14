@@ -24,6 +24,26 @@ package leetcode.p0747
  */
 class Solution {
     fun dominantIndex(nums: IntArray): Int {
-        TODO("Implement solution")
+        var largestIdx: Int
+        var secondIdx: Int
+
+        if (nums[0] > nums[1]) {
+            largestIdx = 0
+            secondIdx = 1
+        } else {
+            largestIdx = 1
+            secondIdx = 0
+        }
+
+        for (i in 2 until nums.size) {
+            if (nums[i] > nums[largestIdx]) {
+                secondIdx = largestIdx
+                largestIdx = i
+            } else if (nums[i] > nums[secondIdx]) {
+                secondIdx = i
+            }
+        }
+
+        return if (nums[largestIdx] >= nums[secondIdx] * 2) largestIdx else -1
     }
 }
