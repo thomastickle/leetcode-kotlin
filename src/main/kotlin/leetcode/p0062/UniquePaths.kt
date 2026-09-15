@@ -24,6 +24,15 @@ package leetcode.p0062
  */
 class Solution {
     fun uniquePaths(m: Int, n: Int): Int {
-        TODO("Implement solution")
+        val smaller = minOf(m, n)
+        val larger = maxOf(m, n)
+        val pathAccumulator = IntArray(smaller)
+        pathAccumulator[0] = 1
+        repeat(larger) {
+            for (i in 1 until smaller) {
+                pathAccumulator[i] += pathAccumulator[i - 1]
+            }
+        }
+        return pathAccumulator[smaller - 1]
     }
 }
