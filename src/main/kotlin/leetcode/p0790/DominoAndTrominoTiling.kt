@@ -1,5 +1,7 @@
 package leetcode.p0790
 
+import kotlin.math.pow
+
 /**
  * # 790. Domino and Tromino Tiling
  *
@@ -22,7 +24,20 @@ package leetcode.p0790
  * [LeetCode 790: Domino and Tromino Tiling](https://leetcode.com/problems/domino-and-tromino-tiling/)
  */
 class Solution {
+    companion object {
+        private const val MOD = 1_000_000_007L
+    }
+
     fun numTilings(n: Int): Int {
-        TODO("Implement solution")
+        if (n < 3) return n
+
+        val tracker = longArrayOf(1, 2, 5)
+        repeat(n - 3) {
+            val temp = tracker[0]
+            tracker[0] = tracker[1]
+            tracker[1] = tracker[2]
+            tracker[2] = (tracker[2] * 2 + temp) % MOD
+        }
+        return tracker[2].toInt()
     }
 }
