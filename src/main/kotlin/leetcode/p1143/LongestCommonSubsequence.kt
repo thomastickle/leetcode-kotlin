@@ -27,6 +27,23 @@ package leetcode.p1143
  */
 class Solution {
     fun longestCommonSubsequence(text1: String, text2: String): Int {
-        TODO("Implement solution")
+        val shorter = if (text1.length <= text2.length) text1 else text2
+        val longer = if (text1.length <= text2.length) text2 else text1
+
+        val memory = IntArray(shorter.length + 1)
+        for (i in longer.indices) {
+            var diagonal = 0
+            for (j in shorter.indices) {
+                val tmp = memory[j + 1]
+                if (longer[i] == shorter[j]) {
+                    memory[j + 1] = diagonal + 1
+                } else {
+                    memory[j + 1] = maxOf(memory[j], memory[j + 1])
+                }
+                diagonal = tmp
+            }
+        }
+
+        return memory[shorter.length]
     }
 }
