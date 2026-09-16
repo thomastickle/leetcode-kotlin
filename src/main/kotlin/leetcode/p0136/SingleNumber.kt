@@ -26,6 +26,12 @@ package leetcode.p0136
  */
 class Solution {
     fun singleNumber(nums: IntArray): Int {
-        TODO("Implement solution")
+        var value = 0
+
+        for (num in nums) {
+            value = value xor num
+        }
+
+        return value
     }
 }
