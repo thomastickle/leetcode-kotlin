@@ -23,6 +23,12 @@ package leetcode.p0338
  */
 class Solution {
     fun countBits(n: Int): IntArray {
-        TODO("Implement solution")
+        val bits = IntArray(n + 1)
+
+        for (currentValue in 1..n) {
+            bits[currentValue] = bits[currentValue shr 1] + (currentValue and 1)
+        }
+
+        return bits
     }
 }
