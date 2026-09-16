@@ -26,6 +26,32 @@ package leetcode.p0072
  */
 class Solution {
     fun minDistance(word1: String, word2: String): Int {
-        TODO("Implement solution")
+        val wordEdit = Array(word1.length + 1) {
+            IntArray(word2.length + 1)
+        }
+
+        for (i in wordEdit.indices) {
+            wordEdit[i][0] = i
+        }
+
+        for (j in wordEdit[0].indices) {
+            wordEdit[0][j] = j
+        }
+
+        for (i in 1..word1.length) {
+            for (j in 1..word2.length) {
+                if (word1[i - 1] == word2[j - 1]) {
+                    wordEdit[i][j] = wordEdit[i - 1][j - 1]
+                } else {
+                    val delete = wordEdit[i - 1][j]
+                    val add = wordEdit[i][j - 1]
+                    val replace = wordEdit[i - 1][j - 1]
+
+                    wordEdit[i][j] = minOf(delete, add, replace) + 1
+                }
+            }
+        }
+
+        return wordEdit.last().last()
     }
 }
