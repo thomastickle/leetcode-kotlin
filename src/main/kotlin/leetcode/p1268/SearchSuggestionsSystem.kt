@@ -47,7 +47,75 @@ package leetcode.p1268
  * [LeetCode 1268: Search Suggestions System](https://leetcode.com/problems/search-suggestions-system/)
  */
 class Solution {
+    private class TrieNode {
+        val children: Array<TrieNode?> = arrayOfNulls(26)
+        var word: String? = null
+    }
+
+    private var root = TrieNode()
+
+    private fun insert(word: String) {
+        var currentNode = root
+
+        for (c in word) {
+            val index = c - 'a'
+
+            if (currentNode.children[index] == null) {
+                currentNode.children[index] = TrieNode()
+            }
+
+            currentNode = currentNode.children[index]!!
+        }
+
+        currentNode.word = word
+    }
+
     fun suggestedProducts(products: Array<String>, searchWord: String): List<List<String>> {
-        TODO("Implement solution")
+        root = TrieNode()
+
+        for (product in products) {
+            insert(product)
+        }
+
+        val results = ArrayList<List<String>>(searchWord.length)
+        var currentNode: TrieNode? = root
+
+        for (c in searchWord) {
+            currentNode = currentNode?.children[c - 'a']
+
+            if (currentNode == null) {
+                results.add(emptyList())
+            } else {
+                val suggestions = ArrayList<String>(3)
+                collectSuggestions(currentNode, suggestions)
+                results.add(suggestions)
+            }
+        }
+
+        return results
+    }
+
+    private fun collectSuggestions(node: TrieNode, suggestions: MutableList<String>) {
+        if (suggestions.size == 3) {
+            return
+        }
+
+        node.word?.let {
+            suggestions.add(it)
+
+            if (suggestions.size == 3) {
+                return
+            }
+        }
+
+        for (child in node.children) {
+            child ?: continue
+
+            collectSuggestions(child, suggestions)
+
+            if (suggestions.size == 3) {
+                return
+            }
+        }
     }
 }
