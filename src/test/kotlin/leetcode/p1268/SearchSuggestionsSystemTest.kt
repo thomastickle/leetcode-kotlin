@@ -73,7 +73,11 @@ class SearchSuggestionsSystemTest {
     @Test
     fun `returns at most three matching products in sorted order`() {
         assertEquals(
-            listOf(listOf("alpha", "alpine", "alps")),
+            listOf(
+                listOf("alpha", "alpine", "alps"),
+                listOf("alpha", "alpine", "alps"),
+                listOf("alpha", "alpine", "alps"),
+            ),
             solution.suggestedProducts(
                 arrayOf("alps", "alpine", "alpha", "alto"),
                 "alp",
@@ -84,8 +88,20 @@ class SearchSuggestionsSystemTest {
     @Test
     fun `returns all products when fewer than three share the prefix`() {
         assertEquals(
-            listOf(listOf("cat", "cater"), listOf("cat", "cater"), listOf("cat")),
+            listOf(listOf("cat", "cater"), listOf("cat", "cater"), listOf("cat", "cater")),
             solution.suggestedProducts(arrayOf("cat", "cater", "dog"), "cat"),
+        )
+    }
+
+    @Test
+    fun `does not reuse products between calls`() {
+        assertEquals(
+            listOf(listOf("apple")),
+            solution.suggestedProducts(arrayOf("apple"), "a"),
+        )
+        assertEquals(
+            listOf(listOf("banana")),
+            solution.suggestedProducts(arrayOf("banana"), "b"),
         )
     }
 }
