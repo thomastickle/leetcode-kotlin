@@ -38,15 +38,45 @@ package leetcode.p0208
  * [LeetCode 208: Implement Trie (Prefix Tree)](https://leetcode.com/problems/implement-trie-prefix-tree/)
  */
 class Trie {
+
+    private class TrieNode {
+        val children: Array<TrieNode?> = arrayOfNulls<TrieNode>(26)
+        var isWord: Boolean = false
+    }
+
+    private val root = TrieNode()
+
     fun insert(word: String) {
-        TODO("Implement solution")
+        var currentNode = root
+
+        for (c in word) {
+            val index = c - 'a'
+
+            if (currentNode.children[index] == null) {
+                currentNode.children[index] = TrieNode()
+            }
+
+            currentNode = currentNode.children[index]!!
+        }
+
+        currentNode.isWord = true
     }
 
     fun search(word: String): Boolean {
-        TODO("Implement solution")
+        return searchHelper(word)
     }
 
     fun startsWith(prefix: String): Boolean {
-        TODO("Implement solution")
+        return searchHelper(prefix, true)
+    }
+
+    private fun searchHelper(word: String, prefixMode: Boolean = false): Boolean {
+        var currentNode: TrieNode = root
+
+        for (c in word) {
+            currentNode = currentNode.children[c-'a'] ?: return false
+        }
+
+        return currentNode.isWord || prefixMode
     }
 }
