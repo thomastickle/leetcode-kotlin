@@ -20,6 +20,8 @@ package leetcode.p1318
  */
 class Solution {
     fun minFlips(a: Int, b: Int, c: Int): Int {
-        TODO("Implement solution")
+        val flips = (a or b) xor c
+        val extraFlips = flips and (a and b)
+        return flips.countOneBits() + extraFlips.countOneBits()
     }
 }
