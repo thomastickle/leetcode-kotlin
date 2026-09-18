@@ -1,5 +1,7 @@
 package leetcode.p0435
 
+import java.util.*
+
 /**
  * # 435. Non-overlapping Intervals
  *
@@ -26,6 +28,18 @@ package leetcode.p0435
  */
 class Solution {
     fun eraseOverlapIntervals(intervals: Array<IntArray>): Int {
-        TODO("Implement solution")
+        intervals.sortBy { it[1]}
+
+        var count = 1
+        var previousEnd = intervals[0][1]
+
+        for (i in 1 until intervals.size) {
+            if (intervals[i][0] >= previousEnd) {
+                previousEnd = intervals[i][1]
+                count++
+            }
+        }
+
+        return intervals.size - count
     }
 }
