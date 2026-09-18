@@ -46,7 +46,19 @@ package leetcode.p0901
  * [LeetCode 901: Online Stock Span](https://leetcode.com/problems/online-stock-span/)
  */
 class StockSpanner {
+    private data class PriceEntry(val price: Int, var day: Int = 1)
+
+    private val priceStack = ArrayDeque<PriceEntry>()
+
     fun next(price: Int): Int {
-        TODO("Implement solution")
+        val priceEntry = PriceEntry(price, 1)
+
+        while (priceStack.isNotEmpty() && price >= priceStack.last().price) {
+            priceEntry.day += priceStack.removeLast().day
+        }
+
+        priceStack.add(priceEntry)
+
+        return priceEntry.day
     }
 }
