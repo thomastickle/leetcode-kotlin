@@ -1,5 +1,7 @@
 package leetcode.p0452
 
+import java.util.*
+
 /**
  * # 452. Minimum Number of Arrows to Burst Balloons
  *
@@ -34,6 +36,18 @@ package leetcode.p0452
  */
 class Solution {
     fun findMinArrowShots(points: Array<IntArray>): Int {
-        TODO("Implement solution")
+        points.sortBy { it[1] }
+
+        var arrows = 1
+        var previous = points[0][1]
+
+        for (i in 1 until points.size) {
+            if (points[i][0] > previous) {
+                previous = points[i][1]
+                arrows++
+            }
+        }
+
+        return arrows
     }
 }
