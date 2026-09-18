@@ -28,6 +28,17 @@ package leetcode.p0027
  */
 class Solution {
     fun removeElement(nums: IntArray, `val`: Int): Int {
-        TODO("Implement solution")
+        var currentIndex = 0
+        var endIndex = nums.lastIndex
+
+        while (currentIndex <= endIndex) {
+            if (nums[currentIndex] == `val`) {
+                nums[currentIndex] = nums[endIndex--]
+            } else {
+                currentIndex++
+            }
+        }
+
+        return currentIndex
     }
 }
