@@ -27,6 +27,15 @@ package leetcode.p0026
  */
 class Solution {
     fun removeDuplicates(nums: IntArray): Int {
-        TODO("Implement solution")
+        var lastUniqueIndex = 0
+
+        for (readIndex in 1 until nums.size) {
+            if (nums[lastUniqueIndex] != nums[readIndex]){
+                lastUniqueIndex++
+                nums[lastUniqueIndex] = nums[readIndex]
+            }
+        }
+
+        return lastUniqueIndex + 1
     }
 }
