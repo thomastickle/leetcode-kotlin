@@ -25,7 +25,19 @@ package leetcode.p0739
  * [LeetCode 739: Daily Temperatures](https://leetcode.com/problems/daily-temperatures/)
  */
 class Solution {
+
     fun dailyTemperatures(temperatures: IntArray): IntArray {
-        TODO("Implement solution")
+        val answer = IntArray(temperatures.size)
+        val stack = ArrayDeque<Int>()
+
+        for (index in temperatures.indices) {
+            while (stack.isNotEmpty() && (temperatures[stack.last()] < temperatures[index])) {
+               val poppedEntry = stack.removeLast()
+               answer[poppedEntry] = index - poppedEntry
+            }
+            stack.add(index)
+        }
+
+        return answer
     }
 }
