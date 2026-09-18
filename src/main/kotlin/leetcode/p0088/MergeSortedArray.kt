@@ -34,6 +34,16 @@ package leetcode.p0088
  */
 class Solution {
     fun merge(nums1: IntArray, m: Int, nums2: IntArray, n: Int) {
-        TODO("Implement solution")
+        var nums1Index = m - 1
+        var nums2Index = n - 1
+        var writeIndex = nums1.size - 1
+
+        while (nums2Index >= 0) {
+            if (nums1Index >= 0 && nums1[nums1Index] > nums2[nums2Index]) {
+                nums1[writeIndex--] = nums1[nums1Index--]
+            } else {
+                nums1[writeIndex--] = nums2[nums2Index--]
+            }
+        }
     }
 }
