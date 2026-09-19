@@ -26,6 +26,21 @@ package leetcode.p0121
  */
 class Solution {
     fun maxProfit(prices: IntArray): Int {
-        TODO("Implement solution")
+        var buyPrice = Int.MAX_VALUE
+        var bestProfit = 0
+
+        for (price in prices) {
+            if (price < buyPrice) {
+                buyPrice = price
+                continue
+            }
+
+            val candidateProfit = price - buyPrice
+            if (candidateProfit > bestProfit) {
+                bestProfit = candidateProfit
+            }
+        }
+
+        return bestProfit
     }
 }
