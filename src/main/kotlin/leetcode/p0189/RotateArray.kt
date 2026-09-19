@@ -23,6 +23,36 @@ package leetcode.p0189
  */
 class Solution {
     fun rotate(nums: IntArray, k: Int) {
-        TODO("Implement solution")
+        val shift = k % nums.size
+        if (shift == 0) return
+        nums.reverse()
+        nums.reverse(0, shift)
+        nums.reverse(shift, nums.size)
+    }
+
+    fun rotateV2(nums: IntArray, k: Int) {
+        val shift = k % nums.size
+        if (shift == 0) return
+
+        var moved = 0
+        var start = 0
+
+        while (moved < nums.size) {
+            var currentIndex = start
+            var carriedValue = nums[currentIndex]
+
+            do {
+                val nextIndex = (currentIndex + shift) % nums.size
+
+                val displacedValue = nums[nextIndex]
+                nums[nextIndex] = carriedValue
+                carriedValue = displacedValue
+
+                currentIndex = nextIndex
+                moved++
+            } while (currentIndex != start)
+
+            start++
+        }
     }
 }
