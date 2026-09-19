@@ -30,6 +30,15 @@ package leetcode.p0122
  */
 class Solution {
     fun maxProfit(prices: IntArray): Int {
-        TODO("Implement solution")
+        var hold = Int.MIN_VALUE
+        var cash = 0
+
+        for (price in prices) {
+            val oldHold = hold
+            hold = maxOf(hold, cash - price)
+            cash = maxOf(cash, oldHold + price)
+        }
+
+        return cash
     }
 }
