@@ -24,6 +24,19 @@ package leetcode.p0169
  */
 class Solution {
     fun majorityElement(nums: IntArray): Int {
-        TODO("Implement solution")
+        var currentValue = 0
+        var currentValueCount = 0
+
+        for (num in nums) {
+            if (currentValueCount == 0) {
+                currentValue = num
+            }
+            if (currentValue == num) {
+                currentValueCount += 1
+            } else {
+                currentValueCount -= 1
+            }
+        }
+        return currentValue
     }
 }
