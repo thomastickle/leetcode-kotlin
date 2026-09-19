@@ -23,6 +23,14 @@ package leetcode.p0055
  */
 class Solution {
     fun canJump(nums: IntArray): Boolean {
-        TODO("Implement solution")
+        var targetIndex = nums.lastIndex
+
+        for (i in nums.lastIndex - 1 downTo 0) {
+            if (i + nums[i] >= targetIndex) {
+                targetIndex = i
+            }
+        }
+
+        return targetIndex == 0
     }
 }
