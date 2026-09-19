@@ -30,6 +30,16 @@ package leetcode.p0080
  */
 class Solution {
     fun removeDuplicates(nums: IntArray): Int {
-        TODO("Implement solution")
+        if (nums.size < 3) return nums.size
+
+        var writeIndex = 2
+
+        for (readPointer in 2 until nums.size) {
+            if (nums[readPointer] != nums[writeIndex - 2]) {
+                nums[writeIndex++] = nums[readPointer]
+            }
+        }
+
+        return writeIndex
     }
 }
