@@ -31,10 +31,10 @@ jobs:
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v6
         with:
-          cache-provider: basic
+          cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
 
       - name: Build and run tests
-        run: ./gradlew build --no-daemon
+        run: ./gradlew build
 
       - name: Report problem progress
         run: bash scripts/problem-progress.sh
