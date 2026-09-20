@@ -26,6 +26,25 @@ package leetcode.p0274
  */
 class Solution {
     fun hIndex(citations: IntArray): Int {
-        TODO("Implement solution")
+        val n = citations.size
+        val counts = IntArray(n + 1)
+
+        for (i in citations) {
+            if (i < n) {
+                counts[i]++
+            } else {
+                counts[n]++
+            }
+        }
+
+        var papersAtLeast = 0
+        for (h in n downTo 0) {
+            papersAtLeast += counts[h]
+            if (papersAtLeast >= h) {
+                return h
+            }
+        }
+
+        return 0
     }
 }
