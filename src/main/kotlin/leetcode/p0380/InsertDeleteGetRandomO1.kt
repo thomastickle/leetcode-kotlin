@@ -1,5 +1,7 @@
 package leetcode.p0380
 
+import kotlin.random.Random
+
 /**
  * # 380. Insert Delete GetRandom O(1)
  *
@@ -41,17 +43,34 @@ package leetcode.p0380
  *
  * [LeetCode 380: Insert Delete GetRandom O(1)](https://leetcode.com/problems/insert-delete-getrandom-o1/)
  */
-class RandomizedSet() {
+class RandomizedSet {
+    private val indexByValue = HashMap<Int, Int>()
+    private val values = ArrayList<Int>(200_000)
 
     fun insert(`val`: Int): Boolean {
-        TODO("Implement solution")
+        if (indexByValue.containsKey(`val`)) return false
+
+        indexByValue[`val`] = values.size
+        values.add(`val`)
+
+        return true
     }
 
     fun remove(`val`: Int): Boolean {
-        TODO("Implement solution")
+        val index = indexByValue[`val`] ?: return false
+        val lastIndex = values.size - 1
+        val lastValue = values[lastIndex]
+
+        values[index] = lastValue
+        indexByValue[lastValue] = index
+
+        values.removeAt(lastIndex)
+        indexByValue.remove(`val`)
+
+        return true
     }
 
     fun getRandom(): Int {
-        TODO("Implement solution")
+        return values[Random.nextInt(values.size)]
     }
 }
