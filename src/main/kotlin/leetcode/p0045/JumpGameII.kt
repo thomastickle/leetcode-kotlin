@@ -29,6 +29,23 @@ package leetcode.p0045
  */
 class Solution {
     fun jump(nums: IntArray): Int {
-        TODO("Implement solution")
+        var jumps = 0
+        var currentEnd = 0
+        var furthestReach = 0
+
+        for (i in 0 until nums.lastIndex) {
+            furthestReach = maxOf(furthestReach, i + nums[i])
+
+            if (i == currentEnd) {
+                jumps++
+                currentEnd = furthestReach
+
+                if (currentEnd >= nums.lastIndex) {
+                    break
+                }
+            }
+        }
+
+        return jumps
     }
 }
