@@ -42,6 +42,22 @@ package leetcode.p0134
  */
 class Solution {
     fun canCompleteCircuit(gas: IntArray, cost: IntArray): Int {
-        TODO("Implement solution")
+        var start = 0
+        var currentFuel = 0
+        var totalFuel = 0
+
+        for (i in gas.indices) {
+            val fuelDelta = gas[i] - cost[i]
+
+            currentFuel += fuelDelta
+            totalFuel += fuelDelta
+
+            if (currentFuel < 0) {
+                start = i + 1
+                currentFuel = 0
+            }
+        }
+
+        return if (totalFuel >= 0) start else -1
     }
 }
