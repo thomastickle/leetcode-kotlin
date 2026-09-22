@@ -38,7 +38,7 @@ class Solution {
             val currentPathCount = prefixMap.getOrDefault(newSum - targetSum, 0)
 
             val incrementedPrefixCount = prefixMap.getOrDefault(newSum, 0) + 1
-            prefixMap.put(newSum, incrementedPrefixCount)
+            prefixMap[newSum] = incrementedPrefixCount
 
             val leftCount = computePathCount(node.left, newSum)
             val rightCount = computePathCount(node.right, newSum)
@@ -46,13 +46,13 @@ class Solution {
             if (incrementedPrefixCount == 1) {
                 prefixMap.remove(newSum)
             } else {
-                prefixMap.put(newSum, incrementedPrefixCount - 1)
+                prefixMap[newSum] = incrementedPrefixCount - 1
             }
 
             return currentPathCount + leftCount + rightCount
         }
 
-        prefixMap.put(0, 1)
+        prefixMap[0] = 1
         return computePathCount(root, 0)
     }
 }

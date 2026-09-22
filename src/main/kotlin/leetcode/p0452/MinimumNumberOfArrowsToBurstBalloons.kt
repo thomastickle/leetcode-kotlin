@@ -1,7 +1,5 @@
 package leetcode.p0452
 
-import java.util.*
-
 /**
  * # 452. Minimum Number of Arrows to Burst Balloons
  *

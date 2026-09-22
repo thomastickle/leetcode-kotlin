@@ -40,7 +40,7 @@ package leetcode.p0208
 class Trie {
 
     private class TrieNode {
-        val children: Array<TrieNode?> = arrayOfNulls<TrieNode>(26)
+        val children: Array<TrieNode?> = arrayOfNulls(26)
         var isWord: Boolean = false
     }
 

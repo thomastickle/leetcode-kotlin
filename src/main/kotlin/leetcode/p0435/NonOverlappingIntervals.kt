@@ -1,7 +1,5 @@
 package leetcode.p0435
 
-import java.util.*
-
 /**
  * # 435. Non-overlapping Intervals
  *

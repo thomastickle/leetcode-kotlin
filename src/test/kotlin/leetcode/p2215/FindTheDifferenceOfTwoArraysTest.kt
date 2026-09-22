@@ -26,7 +26,7 @@ class FindTheDifferenceOfTwoArraysTest {
     fun `returns empty lists when arrays have identical elements`() {
         val result = solution.findDifference(intArrayOf(1, 2, 3), intArrayOf(1, 2, 3))
 
-        assertEquals(listOf(emptySet<Int>(), emptySet<Int>()), result.map { it.toSet() })
+        assertEquals(listOf(emptySet(), emptySet<Int>()), result.map { it.toSet() })
         assertEquals(listOf(0, 0), result.map { it.size })
     }
 
@@ -42,7 +42,7 @@ class FindTheDifferenceOfTwoArraysTest {
     fun `handles single-element arrays with the same value`() {
         val result = solution.findDifference(intArrayOf(1), intArrayOf(1))
 
-        assertEquals(listOf(emptySet<Int>(), emptySet<Int>()), result.map { it.toSet() })
+        assertEquals(listOf(emptySet(), emptySet<Int>()), result.map { it.toSet() })
         assertEquals(listOf(0, 0), result.map { it.size })
     }
 
@@ -69,7 +69,7 @@ class FindTheDifferenceOfTwoArraysTest {
     fun `handles arrays where all elements are duplicate copies of the same value`() {
         val result = solution.findDifference(intArrayOf(5, 5, 5), intArrayOf(5, 5))
 
-        assertEquals(listOf(emptySet<Int>(), emptySet<Int>()), result.map { it.toSet() })
+        assertEquals(listOf(emptySet(), emptySet<Int>()), result.map { it.toSet() })
         assertEquals(listOf(0, 0), result.map { it.size })
     }
 }
