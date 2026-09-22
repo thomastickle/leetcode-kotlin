@@ -26,8 +26,40 @@ package leetcode.p0135
  *
  * [LeetCode 135: Candy](https://leetcode.com/problems/candy/)
  */
+
 class Solution {
     fun candy(ratings: IntArray): Int {
-        TODO("Implement solution")
+        var totalCandies = 1
+        var upLength = 0
+        var downLength = 0
+
+        for (i in 1..<ratings.size) {
+            when {
+                ratings[i] == ratings[i - 1] -> {
+                    upLength = 0
+                    downLength = 0
+                    totalCandies++
+                }
+
+                ratings[i] > ratings[i - 1] -> {
+                    if (downLength > 0) {
+                        upLength = 0
+                        downLength = 0
+                    }
+                    upLength++
+                    totalCandies += upLength + 1
+                }
+
+                else -> {
+                    downLength++
+                    totalCandies += downLength
+                    if (upLength < downLength) {
+                        totalCandies++
+                    }
+                }
+            }
+        }
+
+        return totalCandies
     }
 }
