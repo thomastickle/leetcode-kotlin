@@ -45,7 +45,7 @@ class Solution {
             }
         }
 
-        compute(1, mutableListOf<Int>(), n)
+        compute(1, mutableListOf(), n)
 
         return output
     }

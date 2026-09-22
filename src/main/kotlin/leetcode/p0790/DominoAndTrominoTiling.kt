@@ -1,7 +1,5 @@
 package leetcode.p0790
 
-import kotlin.math.pow
-
 /**
  * # 790. Domino and Tromino Tiling
  *
