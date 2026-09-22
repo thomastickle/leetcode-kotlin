@@ -9,7 +9,7 @@ package leetcode.p0042
  * Examples:
  * - Input: `height = [0,1,0,2,1,0,1,3,2,1,2,1]`. Output: `6`.
  *   Explanation: The elevation map is represented by array [0,1,0,2,1,0,1,3,2,1,2,1]. In this case,
- *   6 units of rain water are being trapped.
+ *   6 units of rainwater are being trapped.
  * - Input: `height = [4,2,0,3,2,5]`. Output: `9`.
  *
  * Constraints:
@@ -21,6 +21,25 @@ package leetcode.p0042
  */
 class Solution {
     fun trap(height: IntArray): Int {
-        TODO("Implement solution")
+        var leftIndex = 0
+        var rightIndex = height.size - 1
+        var leftMax = 0
+        var rightMax = 0
+        var answer = 0
+
+        while (leftIndex < rightIndex) {
+            leftMax = maxOf(leftMax, height[leftIndex])
+            rightMax = maxOf(rightMax, height[rightIndex])
+
+            if (leftMax < rightMax) {
+                answer += leftMax - height[leftIndex]
+                leftIndex++
+            } else {
+                answer += rightMax - height[rightIndex]
+                rightIndex--
+            }
+        }
+
+        return answer
     }
 }
