@@ -43,7 +43,32 @@ package leetcode.p0012
  * [LeetCode 12: Integer to Roman](https://leetcode.com/problems/integer-to-roman/)
  */
 class Solution {
+    private enum class RomanNumeral(val value: Int) {
+        M(1000),
+        CM(900),
+        D(500),
+        CD(400),
+        C(100),
+        XC(90),
+        L(50),
+        XL(40),
+        X(10),
+        IX(9),
+        V(5),
+        IV(4),
+        I(1)
+    }
+
     fun intToRoman(num: Int): String {
-        TODO("Implement solution")
+        val output = StringBuilder()
+        var remaining = num
+        for (entry in RomanNumeral.entries){
+            val repeatCount = remaining / entry.value
+            remaining %= entry.value
+            repeat(repeatCount) {
+                output.append(entry.name)
+            }
+        }
+        return output.toString()
     }
 }
