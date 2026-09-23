@@ -24,6 +24,18 @@ package leetcode.p0058
  */
 class Solution {
     fun lengthOfLastWord(s: String): Int {
-        TODO("Implement solution")
+        var i = s.length - 1
+
+        while (i > 0 && s[i] == ' ') {
+            i--
+        }
+
+        var length = 0
+        while (i >= 0 && s[i] != ' ') {
+            length++
+            i--
+        }
+
+        return length
     }
 }
