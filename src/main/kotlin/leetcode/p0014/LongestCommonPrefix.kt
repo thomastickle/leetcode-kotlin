@@ -20,7 +20,26 @@ package leetcode.p0014
  * [LeetCode 14: Longest Common Prefix](https://leetcode.com/problems/longest-common-prefix/)
  */
 class Solution {
+
     fun longestCommonPrefix(strs: Array<String>): String {
-        TODO("Implement solution")
+        var shortestLength = strs[0].length
+
+        for (word in strs) {
+            shortestLength = minOf(shortestLength, word.length)
+        }
+
+        val first = strs[0]
+
+        for (i in 0..<shortestLength) {
+            val current = first[i]
+
+            for (j in 1..<strs.size) {
+                if (strs[j][i] != current) {
+                    return first.substring(0, i)
+                }
+            }
+        }
+
+        return first.substring(0, shortestLength)
     }
 }
