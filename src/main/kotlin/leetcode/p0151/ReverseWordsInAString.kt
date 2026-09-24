@@ -23,23 +23,18 @@ package leetcode.p0151
  * [LeetCode 151: Reverse Words in a String](https://leetcode.com/problems/reverse-words-in-a-string/)
  */
 class Solution {
-//    fun reverseWords(s: String) =
-//        s.split(" ").filter { it.isNotEmpty() }.asReversed().joinToString(" ")
-
     fun reverseWords(s: String): String {
         val output = StringBuilder()
-        var i = s.length - 1  // We use this because leetcode makes the kotlin stdlib very costly
+        var i = s.lastIndex
+
         while (i >= 0) {
-            // Skip spaces
             while (i >= 0 && s[i] == ' ') {
                 i--
             }
 
             if (i < 0) break
 
-            val wordEnd = i
-
-            // Find beginning of word
+            val endOfWord = i
             while (i >= 0 && s[i] != ' ') {
                 i--
             }
@@ -48,11 +43,9 @@ class Solution {
                 output.append(' ')
             }
 
-            output.append(s, i + 1, wordEnd + 1)
+            output.append(s, i + 1, endOfWord + 1)
         }
 
         return output.toString()
     }
-
-
 }
