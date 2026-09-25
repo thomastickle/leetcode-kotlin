@@ -25,6 +25,22 @@ package leetcode.p0006
  */
 class Solution {
     fun convert(s: String, numRows: Int): String {
-        TODO("Implement solution")
+        if (numRows == 1) return s
+
+        val cycleLength = 2 * (numRows - 1)
+        val length = s.length
+        val output = StringBuilder(length)
+
+        for (currentRow in 0 until numRows) {
+            for (j in currentRow until length step cycleLength) {
+                output.append(s[j])
+                if (currentRow != 0 && currentRow !=  numRows - 1) {
+                    val diag = j + cycleLength - 2 * currentRow
+                    if (diag < length) output.append(s[diag])
+                }
+            }
+        }
+
+        return output.toString()
     }
 }
