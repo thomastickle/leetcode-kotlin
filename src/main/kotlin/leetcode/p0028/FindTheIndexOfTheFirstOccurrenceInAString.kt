@@ -20,10 +20,56 @@ package leetcode.p0028
  */
 class Solution {
     fun strStr(haystack: String, needle: String): Int {
-        TODO("Implement solution")
+        /**
+         * Construct the longest prefix suffix array needed by the KMP algorithm.
+         */
+        fun buildLPSArray(string: String): IntArray {
+            val longestPrefixSuffix = IntArray(string.length)
+            var prefixLength = 0
+            for (prefixArrayIndex in 1 until string.length) {
+                while (prefixLength > 0 && string[prefixArrayIndex] != string[prefixLength]) {
+                    prefixLength = longestPrefixSuffix[prefixLength - 1]
+                }
+                if (string[prefixArrayIndex] == string[prefixLength]) {
+                    prefixLength++
+                }
+                longestPrefixSuffix[prefixArrayIndex] = prefixLength
+            }
+            return longestPrefixSuffix
+        }
+
+        val lps = buildLPSArray(needle)
+        var haystackIndex = 0
+        var matchLength = 0
+        while (haystackIndex < haystack.length) {
+            while (matchLength > 0 && haystack[haystackIndex] != needle[matchLength]) {
+                matchLength = lps[matchLength - 1]
+            }
+            if (haystack[haystackIndex] == needle[matchLength]) {
+                matchLength++
+            }
+            if (matchLength == needle.length) {
+                return haystackIndex - matchLength + 1
+            }
+            haystackIndex++
+        }
+
+        return -1
     }
 
     fun strStrBrute(haystack: String, needle: String): Int {
-        TODO("Implement solution")
+        val lastStartIndex = haystack.length - needle.length
+        var i = 0
+        while (i <= lastStartIndex) {
+            var needleIndex = 0
+            while (needleIndex < needle.length && haystack[i + needleIndex] == needle[needleIndex]) {
+                needleIndex++
+            }
+            if (needleIndex == needle.length) return i
+
+            i++
+        }
+
+        return -1
     }
 }
