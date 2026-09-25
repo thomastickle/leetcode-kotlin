@@ -165,6 +165,10 @@ conventions unless explicitly asked to change them.
 
 After making changes, run the smallest relevant test command when practical.
 
+When running or debugging tests, prefer IntelliJ's IDE test/run tooling. Use
+the available IDE MCP tools to find and run the relevant configuration; use the
+terminal only when IDE execution is unavailable or unsuitable.
+
 For a test-generation task:
 
 1. Generate or modify the tests.
