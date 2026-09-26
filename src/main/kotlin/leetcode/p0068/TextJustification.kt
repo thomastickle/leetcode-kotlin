@@ -41,6 +41,75 @@ package leetcode.p0068
  */
 class Solution {
     fun fullJustify(words: Array<String>, maxWidth: Int): List<String> {
-        TODO("Implement solution")
+        val result = ArrayList<String>()
+        var start = 0
+
+        while (start < words.size) {
+            var end = start
+            var wordChars = 0
+
+            while (end < words.size && wordChars + words[end].length + (end - start) <= maxWidth) {
+                wordChars += words[end].length
+                end++
+            }
+
+            result.add(
+                justifyLine(
+                    words = words,
+                    start = start,
+                    end = end,
+                    wordChars = wordChars,
+                    maxWidth = maxWidth,
+                    isLastLine = end == words.size
+                )
+            )
+
+            start = end
+        }
+
+        return result
+    }
+
+    private fun justifyLine(words: Array<String>,
+                            start: Int,
+                            end: Int,
+                            wordChars: Int,
+                            maxWidth: Int,
+                            isLastLine: Boolean): String {
+        val output = StringBuilder(maxWidth)
+        val wordCount = end - start
+
+        if (wordCount == 1 || isLastLine) {
+            for (i in start until end) {
+                if (i > start) output.append(' ')
+                output.append(words[i])
+            }
+
+            while (output.length < maxWidth) {
+                output.append(' ')
+            }
+
+            return output.toString()
+        }
+
+        val gapCount = wordCount - 1
+        val spaces = maxWidth - wordChars
+        val spacesPerGap = spaces / gapCount
+        val extraSpaces = spaces % gapCount
+
+        for (i in start until end) {
+            output.append(words[i])
+
+            if (i + 1 < end) {
+                val gapIndex = i - start
+                val gapWidth = spacesPerGap + if (gapIndex < extraSpaces) 1 else 0
+
+                repeat(gapWidth) {
+                    output.append(' ')
+                }
+            }
+        }
+
+        return output.toString()
     }
 }
