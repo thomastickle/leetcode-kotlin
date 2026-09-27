@@ -31,6 +31,19 @@ package leetcode.p0167
  */
 class Solution {
     fun twoSum(numbers: IntArray, target: Int): IntArray {
-        TODO("Implement solution")
+        var left = 0
+        var right = numbers.size - 1
+        while (left < right) {
+            val sum = numbers[left] + numbers[right]
+            if (sum < target) {
+                left++
+            } else if (sum > target) {
+                right--
+            } else {
+               return intArrayOf(left + 1, right + 1)
+            }
+        }
+
+        return intArrayOf()
     }
 }
