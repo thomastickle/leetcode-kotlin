@@ -29,10 +29,27 @@ package leetcode.p0125
  */
 class Solution {
     fun isPalindrome(s: String): Boolean {
-        val left = 0
-        val right = s.length -1
+        var left = 0
+        var right = s.length - 1
 
-        while (left <= right && s[left] == s[right] )
-        TODO("Implement solution")
-                }
+        while (left < right) {
+            if (!s[left].isLetterOrDigit()) {
+                left++
+                continue
+            }
+
+            if (!s[right].isLetterOrDigit()) {
+                right--
+                continue
+            }
+
+            if (s[left].lowercaseChar() != s[right].lowercaseChar()) {
+                return false
+            }
+            left++
+            right--
+        }
+
+        return true
+    }
 }
