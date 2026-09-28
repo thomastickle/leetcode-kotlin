@@ -25,6 +25,55 @@ package leetcode.p0015
  */
 class Solution {
     fun threeSum(nums: IntArray): List<List<Int>> {
-        TODO("Implement solution")
+        nums.sort()
+        val triplets = mutableListOf<List<Int>>()
+
+        for (fixedIndex in nums.indices) {
+            if (nums[fixedIndex] > 0) break
+
+            if (fixedIndex > 0 && nums[fixedIndex] == nums[fixedIndex - 1]) {
+                continue
+            }
+
+            findPairs(nums, fixedIndex, triplets)
+        }
+
+        return triplets
+    }
+
+    private fun findPairs(nums: IntArray, fixedIndex: Int, triplets: MutableList<List<Int>>) {
+        val fixedValue = nums[fixedIndex]
+        val pairTarget = -fixedValue
+
+        var leftIndex = fixedIndex + 1
+        var rightIndex = nums.size - 1
+
+        while (leftIndex < rightIndex) {
+            val pairSum = nums[leftIndex] + nums[rightIndex]
+
+            when {
+                pairSum < pairTarget -> leftIndex++
+                pairSum > pairTarget -> rightIndex--
+
+                else -> {
+                    triplets.add(
+                        listOf(
+                            fixedValue, nums[leftIndex], nums[rightIndex]
+                        )
+                    )
+
+                    leftIndex++
+                    rightIndex--
+
+                    while (leftIndex < rightIndex && nums[leftIndex] == nums[leftIndex - 1]) {
+                        leftIndex++
+                    }
+
+                    while (leftIndex < rightIndex && nums[rightIndex] == nums[rightIndex + 1]) {
+                        rightIndex--
+                    }
+                }
+            }
+        }
     }
 }
