@@ -25,6 +25,27 @@ package leetcode.p0003
  */
 class Solution {
     fun lengthOfLongestSubstring(s: String): Int {
-        TODO("Implement solution")
+
+        val lastSeen = mutableMapOf<Char, Int>()
+        var left = 0
+        var right = 0
+        var longest = 0
+
+        while (right < s.length) {
+            val charFromString = s[right]
+            val lastSeenLocation = lastSeen[charFromString]
+
+            if (lastSeenLocation != null) {
+                if (lastSeenLocation >= left) {
+                    left = lastSeenLocation + 1
+                }
+            }
+
+            lastSeen[charFromString] = right++
+            longest = maxOf(longest, right - left)
+        }
+
+
+        return longest
     }
 }
