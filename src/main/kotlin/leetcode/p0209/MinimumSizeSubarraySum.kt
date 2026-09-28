@@ -29,6 +29,20 @@ package leetcode.p0209
  */
 class Solution {
     fun minSubArrayLen(target: Int, nums: IntArray): Int {
-        TODO("Implement solution")
+        var left = 0
+        var right = 0
+        var currentSum = 0
+        var smallest = Int.MAX_VALUE
+
+        while (right < nums.size) {
+            currentSum += nums[right++]
+
+            while (currentSum >= target) {
+                smallest = minOf(smallest, right - left)
+                currentSum -= nums[left++]
+            }
+        }
+
+        return if (smallest == Int.MAX_VALUE) 0 else smallest
     }
 }
