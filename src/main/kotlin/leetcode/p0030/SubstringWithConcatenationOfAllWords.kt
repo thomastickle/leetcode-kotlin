@@ -37,7 +37,58 @@ package leetcode.p0030
  * [LeetCode 30: Substring with Concatenation of All Words](https://leetcode.com/problems/substring-with-concatenation-of-all-words/)
  */
 class Solution {
+
     fun findSubstring(s: String, words: Array<String>): List<Int> {
-        TODO("Implement solution")
+        val wordSize = words[0].length
+
+        val wordCounts = mutableMapOf<String, Int>().apply {
+            words.forEach { word ->
+                this[word] = getOrDefault(word, 0) + 1
+            }
+        }
+
+        val result = mutableListOf<Int>()
+
+        for (offset in 0 until wordSize) {
+            var left = offset
+            var right = offset
+            var wordsInWindow = 0
+
+            val seenCounts = mutableMapOf<String, Int>()
+
+            while (right + wordSize <= s.length) {
+                val word = s.substring(right, right + wordSize)
+                right += wordSize
+
+                if (word !in wordCounts) {
+                    seenCounts.clear()
+                    wordsInWindow = 0
+                    left = right
+                    continue
+                }
+
+                seenCounts[word] = seenCounts.getOrDefault(word, 0) + 1
+                wordsInWindow++
+
+                while (seenCounts.getValue(word) > wordCounts.getValue(word)) {
+                    val leftWord = s.substring(left, left + wordSize)
+
+                    seenCounts[leftWord] = seenCounts.getValue(leftWord) - 1
+                    left += wordSize
+                    wordsInWindow--
+                }
+
+                if (wordsInWindow == words.size) {
+                    result.add(left)
+
+                    val leftWord = s.substring(left, left + wordSize)
+                    seenCounts[leftWord] = seenCounts.getValue(leftWord) - 1
+                    left += wordSize
+                    wordsInWindow--
+                }
+            }
+        }
+
+        return result
     }
 }
