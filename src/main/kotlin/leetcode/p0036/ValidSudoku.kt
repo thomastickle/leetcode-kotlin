@@ -20,6 +20,28 @@ package leetcode.p0036
  */
 class Solution {
     fun isValidSudoku(board: Array<CharArray>): Boolean {
-        TODO("Implement solution")
+        val rowSets = IntArray(9)
+        val columnSets = IntArray(9)
+        val blockSets = IntArray(9)
+
+        for (row in 0 until 9) {
+            for (column in 0 until 9) {
+                val c = board[row][column]
+                if (c == '.') continue
+
+                val bit = 1 shl (c - '0')
+                val blockIndex = 3 * (row / 3) + column / 3
+
+                if (rowSets[row] and bit != 0 || columnSets[column] and bit != 0 || blockSets[blockIndex] and bit != 0) {
+                    return false
+                }
+
+                rowSets[row] = rowSets[row] or bit
+                columnSets[column] = columnSets[column] or bit
+                blockSets[blockIndex] = blockSets[blockIndex] or bit
+            }
+        }
+
+        return true
     }
 }
