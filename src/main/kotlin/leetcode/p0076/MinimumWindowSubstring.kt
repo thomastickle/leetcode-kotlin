@@ -29,7 +29,50 @@ package leetcode.p0076
  * [LeetCode 76: Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/)
  */
 class Solution {
+
     fun minWindow(s: String, t: String): String {
-        TODO("Implement solution")
+        if (s.length < t.length) return ""
+
+        val counts = IntArray(128)
+        t.forEach { counts[it.code]++ }
+
+        var charsRemaining = t.length
+        var left = 0
+
+        var minStart = 0
+        var minLength = Int.MAX_VALUE
+
+        s.forEachIndexed { right, c ->
+            val index = c.code
+
+            if (counts[index] > 0) {
+                charsRemaining--
+            }
+            counts[index]--
+
+            while (charsRemaining == 0) {
+                val windowLength = right - left + 1
+
+                if (windowLength < minLength) {
+                    minStart = left
+                    minLength = windowLength
+                }
+
+                val leftIndex = s[left].code
+                counts[leftIndex]++
+
+                if (counts[leftIndex] > 0) {
+                    charsRemaining++
+                }
+
+                left++
+            }
+        }
+
+        return if (minLength == Int.MAX_VALUE) {
+            ""
+        } else {
+            s.substring(minStart, minStart + minLength)
+        }
     }
 }
