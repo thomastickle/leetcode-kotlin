@@ -21,6 +21,39 @@ package leetcode.p0054
  */
 class Solution {
     fun spiralOrder(matrix: Array<IntArray>): List<Int> {
-        TODO("Implement solution")
+        val output = ArrayList<Int>(matrix.size * matrix[0].size)
+
+        var left = 0
+        var right = matrix[0].lastIndex
+        var top = 0
+        var bottom = matrix.lastIndex
+
+        while (left <= right && top <= bottom) {
+            for (column in left..right) {
+                output.add(matrix[top][column])
+            }
+            top++
+
+            for (row in top..bottom) {
+                output.add(matrix[row][right])
+            }
+            right--
+
+            if (top <= bottom) {
+                for (column in right downTo left) {
+                    output.add(matrix[bottom][column])
+                }
+                bottom--
+            }
+
+            if (left <= right) {
+                for (row in bottom downTo top) {
+                    output.add(matrix[row][left])
+                }
+                left++
+            }
+        }
+
+        return output
     }
 }
