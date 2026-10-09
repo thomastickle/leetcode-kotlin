@@ -24,6 +24,35 @@ package leetcode.p0073
  */
 class Solution {
     fun setZeroes(matrix: Array<IntArray>) {
-        TODO("Implement solution")
+        val rows = matrix.size
+        val columns = matrix[0].size
+        var firstColumnZero = false
+
+        // Record all the rows and column that have a 0, taking care to preserve the first column, but noting
+        // if the first column has a zero
+        for (row in 0 until rows) {
+            if (matrix[row][0] == 0) {
+                firstColumnZero = true
+            }
+
+            for (column in 1 until columns) {
+                if (matrix[row][column] == 0) {
+                    matrix[row][0] = 0
+                    matrix[0][column] = 0
+                }
+            }
+        }
+
+        for (row in rows -1 downTo 0) {
+            for (column in columns - 1 downTo 1) {
+                if (matrix[row][0] == 0 || matrix[0][column] == 0) {
+                    matrix[row][column] = 0
+                }
+            }
+
+            if (firstColumnZero) {
+                matrix[row][0] = 0
+            }
+        }
     }
 }
