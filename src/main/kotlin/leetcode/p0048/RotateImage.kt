@@ -21,6 +21,20 @@ package leetcode.p0048
  */
 class Solution {
     fun rotate(matrix: Array<IntArray>) {
-        TODO("Implement solution")
+        val matrixSize = matrix.size
+        val rowsToRotate = matrixSize / 2
+        val columnsToRotate = (matrixSize + 1) / 2
+        val last = matrixSize - 1
+        for (row in 0 until rowsToRotate) {
+            for (column in 0 until columnsToRotate) {
+                val oppositeRow = last - row
+                val oppositeColumn = last - column
+                val temp = matrix[row][column]
+                matrix[row][column] = matrix[oppositeColumn][row]
+                matrix[oppositeColumn][row] = matrix[oppositeRow][oppositeColumn]
+                matrix[oppositeRow][oppositeColumn] = matrix[column][oppositeRow]
+                matrix[column][oppositeRow] = temp
+            }
+        }
     }
 }
