@@ -20,6 +20,19 @@ package leetcode.p0383
  */
 class Solution {
     fun canConstruct(ransomNote: String, magazine: String): Boolean {
-        TODO("Implement solution")
+        if (ransomNote.length > magazine.length) return false
+        val frequencyMap = IntArray(128)
+        for (char in magazine) {
+            frequencyMap[char.code]++
+        }
+
+        for (char in ransomNote) {
+            frequencyMap[char.code]--
+            if (frequencyMap[char.code] < 0) {
+               return false
+            }
+        }
+
+        return true
     }
 }
