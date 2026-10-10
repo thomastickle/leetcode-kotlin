@@ -36,6 +36,49 @@ package leetcode.p0289
  */
 class Solution {
     fun gameOfLife(board: Array<IntArray>) {
-        TODO("Implement solution")
+        val m = board.size
+        val n = board[0].size
+
+        fun getLiveNeighborCount(row: Int, column: Int): Int {
+            var neighborCount = 0
+
+            val startRow = maxOf(0, row - 1)
+            val stopRow = minOf(m - 1, row + 1)
+            val startColumn = maxOf(0, column - 1)
+            val stopColumn = minOf(n - 1, column + 1)
+
+            for (i in startRow..stopRow) {
+                for (j in startColumn..stopColumn) {
+                    if (i == row && j == column) continue
+
+                    neighborCount += board[i][j] and 1
+                }
+            }
+
+            return neighborCount
+        }
+
+        for (row in 0 until m) {
+            for (column in 0 until n) {
+                val liveNeighbors = getLiveNeighborCount(row, column)
+                val alive = board[row][column] and 1 == 1
+
+                val survives = if (alive) {
+                    liveNeighbors in 2..3
+                } else {
+                    liveNeighbors == 3
+                }
+
+                if (survives) {
+                    board[row][column] = board[row][column] or 2
+                }
+            }
+        }
+
+        for (row in 0 until m) {
+            for (column in 0 until n) {
+                board[row][column] = board[row][column] ushr 1
+            }
+        }
     }
 }
