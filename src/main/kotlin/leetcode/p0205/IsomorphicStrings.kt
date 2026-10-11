@@ -23,6 +23,21 @@ package leetcode.p0205
  */
 class Solution {
     fun isIsomorphic(s: String, t: String): Boolean {
-        TODO("Implement solution")
+        val sToTMap = CharArray(128) { Char.MAX_VALUE }
+        val tToSMap = CharArray(128) { Char.MAX_VALUE }
+
+        for (i in s.indices) {
+            val sChar = s[i]
+            val tChar = t[i]
+            val sMapValue = sToTMap[sChar.code]
+            val tMapValue = tToSMap[tChar.code]
+            if (sMapValue == Char.MAX_VALUE && tMapValue == Char.MAX_VALUE) {
+                sToTMap[sChar.code] = tChar
+                tToSMap[tChar.code] = sChar
+            } else if (sMapValue != tChar || tMapValue != sChar) {
+                return false
+            }
+        }
+        return true
     }
 }
