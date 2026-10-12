@@ -22,6 +22,18 @@ package leetcode.p0242
  */
 class Solution {
     fun isAnagram(s: String, t: String): Boolean {
-        TODO("Implement solution")
+        if ( s.length != t.length) return false
+
+        val frequencyCounter = IntArray(26)
+        for (char in s) {
+            frequencyCounter[char - 'a']++
+        }
+
+        for (char in t) {
+            if (--frequencyCounter[char - 'a'] < 0) {
+                return false
+            }
+        }
+        return true
     }
 }
