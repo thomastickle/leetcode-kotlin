@@ -22,6 +22,20 @@ package leetcode.p0049
  */
 class Solution {
     fun groupAnagrams(strs: Array<String>): List<List<String>> {
-        TODO("Implement solution")
+        val wordMap = HashMap<String, MutableList<String>>()
+        for (word in strs) {
+            val frequencies = CharArray(26)
+            for (char in word) {
+                frequencies[char - 'a']++
+            }
+            val key = String(frequencies)
+            wordMap.getOrPut(key) {mutableListOf()}.add(word)
+        }
+
+        val output = ArrayList<List<String>>(wordMap.size)
+        for ( value in wordMap.values) {
+            output.add(value)
+        }
+        return output
     }
 }
