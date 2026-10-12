@@ -25,6 +25,37 @@ package leetcode.p0290
  */
 class Solution {
     fun wordPattern(pattern: String, s: String): Boolean {
-        TODO("Implement solution")
+        val letterToWords = arrayOfNulls<String>(26)
+        val wordToLetters = HashMap<String, Char>()
+
+        var patternIndex = 0
+        var wordStart = 0
+
+        for (i in 0..s.length) {
+            if (i == s.length || s[i] == ' ') {
+                if (patternIndex >= pattern.length) {
+                    return false
+                }
+
+                val word = s.substring(wordStart, i)
+                val letter = pattern[patternIndex]
+                val letterIndex = letter - 'a'
+
+                val letterToWord = letterToWords[letterIndex]
+                val wordToLetter = wordToLetters[word]
+
+                if (letterToWord == null && wordToLetter == null) {
+                    letterToWords[letterIndex] = word
+                    wordToLetters[word] = letter
+                } else if (letterToWord != word || wordToLetter != letter) {
+                    return false
+                }
+
+                patternIndex++
+                wordStart = i + 1
+            }
+        }
+
+        return patternIndex == pattern.length
     }
 }
