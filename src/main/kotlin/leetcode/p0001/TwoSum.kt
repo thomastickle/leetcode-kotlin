@@ -26,6 +26,17 @@ package leetcode.p0001
  */
 class Solution {
     fun twoSum(nums: IntArray, target: Int): IntArray {
-        TODO("Implement solution")
+        val compliments = HashMap<Int, Int>()
+        for (index in 0 until nums.size) {
+            val num = nums[index]
+            val compliment = target - num
+            val complimentIndex = compliments[num]
+            if (complimentIndex != null) {
+                return intArrayOf(complimentIndex, index)
+            } else {
+                compliments[compliment] = index
+            }
+        }
+        return intArrayOf()
     }
 }
