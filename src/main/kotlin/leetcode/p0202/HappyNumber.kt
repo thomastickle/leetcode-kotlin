@@ -26,6 +26,25 @@ package leetcode.p0202
  */
 class Solution {
     fun isHappy(n: Int): Boolean {
-        TODO("Implement solution")
+        fun nextNumber(n: Int): Int {
+            var result = 0
+            var number = n
+            while (number > 0) {
+                val digit = number % 10
+                result += digit * digit
+                number /= 10
+            }
+            return result
+        }
+
+        val seenValues = HashSet<Int>()
+        var number = n
+
+        while (number != 1) {
+            if (!seenValues.add(number)) return false
+            number = nextNumber(number)
+        }
+
+        return true
     }
 }
