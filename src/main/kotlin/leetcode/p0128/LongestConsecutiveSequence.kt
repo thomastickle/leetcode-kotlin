@@ -25,6 +25,83 @@ package leetcode.p0128
  */
 class Solution {
     fun longestConsecutive(nums: IntArray): Int {
-        TODO("Implement solution")
+        val numSet = nums.toSet()
+        var maxIntervalLength = 0
+        for (num in numSet) {
+            if (num - 1 !in numSet) {
+                var length = 1
+                while (num + length in numSet) {
+                    length++
+                }
+                if (length > maxIntervalLength) {
+                    maxIntervalLength = length
+                }
+            }
+        }
+
+        return maxIntervalLength
+    }
+
+    fun longestConsecutiveRadix(nums: IntArray): Int {
+        if (nums.isEmpty()) return 0
+
+        val scratch = IntArray(nums.size)
+        val counts = IntArray(256)
+
+        var source = nums
+        var destination = scratch
+
+        // Four passes, 8 bits each, for 32-bit integers.
+        for (shift in 0..24 step 8) {
+            counts.fill(0)
+
+            // Count occurrences in each bucket.
+            for (value in source) {
+                val bucket = ((value xor Int.MIN_VALUE) ushr shift) and 0xFF
+                counts[bucket]++
+            }
+
+            // Convert counts into starting positions.
+            var offset = 0
+            for (bucket in counts.indices) {
+                val count = counts[bucket]
+                counts[bucket] = offset
+                offset += count
+            }
+
+            // Distribute values in stable order.
+            for (value in source) {
+                val bucket = ((value xor Int.MIN_VALUE) ushr shift) and 0xFF
+                destination[counts[bucket]++] = value
+            }
+
+            // Swap input and output buffers.
+            val temp = source
+            source = destination
+            destination = temp
+        }
+
+        // Find the longest consecutive sequence.
+        var longest = 1
+        var currentLength = 1
+
+        for (index in 1 until source.size) {
+            val current = source[index]
+            val previous = source[index - 1]
+
+            if (current == previous) continue
+
+            if (current == previous + 1) {
+                currentLength++
+            } else {
+                currentLength = 1
+            }
+
+            if (currentLength > longest) {
+                longest = currentLength
+            }
+        }
+
+        return longest
     }
 }
