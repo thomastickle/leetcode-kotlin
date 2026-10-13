@@ -1,5 +1,7 @@
 package leetcode.p0219
 
+import kotlin.math.abs
+
 /**
  * # 219. Contains Duplicate II
  *
@@ -21,6 +23,17 @@ package leetcode.p0219
  */
 class Solution {
     fun containsNearbyDuplicate(nums: IntArray, k: Int): Boolean {
-        TODO("Implement solution")
+        val lastSeenIndexByValue = HashMap<Int, Int>()
+
+        for (index in nums.indices) {
+            val value = nums[index]
+            val previousIndex = lastSeenIndexByValue.put(value, index)
+
+            if (previousIndex != null && index - previousIndex <= k) {
+                return true
+            }
+        }
+
+        return false
     }
 }
