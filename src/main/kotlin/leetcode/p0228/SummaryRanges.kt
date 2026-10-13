@@ -31,6 +31,31 @@ package leetcode.p0228
  */
 class Solution {
     fun summaryRanges(nums: IntArray): List<String> {
-        TODO("Implement solution")
+        fun intervalToString(intervalStart: Int, intervalEnd: Int): String {
+            return if (intervalStart == intervalEnd) {
+                "$intervalEnd"
+            } else {
+                "$intervalStart->$intervalEnd"
+            }
+        }
+
+        if (nums.isEmpty()) return emptyList()
+        val result = mutableListOf<String>()
+        var previousValue = nums[0]
+        var intervalStart = nums[0]
+        for (i in 1 ..< nums.size) {
+            val num = nums[i]
+            if (num > previousValue + 1) {
+                result.add(intervalToString(intervalStart, previousValue))
+                intervalStart = num
+            }
+                previousValue = num
+
+        }
+
+        result.add(intervalToString(intervalStart, previousValue))
+
+        return result
     }
+
 }
