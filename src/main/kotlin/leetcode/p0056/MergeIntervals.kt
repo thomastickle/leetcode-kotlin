@@ -24,6 +24,32 @@ package leetcode.p0056
  */
 class Solution {
     fun merge(intervals: Array<IntArray>): Array<IntArray> {
-        TODO("Implement solution")
+        intervals.sortWith { a, b ->
+            a[0].compareTo(b[0])
+        }
+
+        val mergedIntervals = mutableListOf<IntArray>()
+        var mergedStart = intervals[0][0]
+        var mergedEnd = intervals[0][1]
+
+        for (index in 1 until intervals.size) {
+            val currentInterval = intervals[index]
+            val currentStart = currentInterval[0]
+            val currentEnd = currentInterval[1]
+
+            if (currentStart <= mergedEnd) {
+                if (currentEnd > mergedEnd) {
+                    mergedEnd = currentEnd
+                }
+            } else {
+                mergedIntervals.add(intArrayOf(mergedStart, mergedEnd))
+                mergedStart = currentStart
+                mergedEnd = currentEnd
+            }
+        }
+
+        mergedIntervals.add(intArrayOf(mergedStart, mergedEnd))
+
+        return mergedIntervals.toTypedArray()
     }
 }
