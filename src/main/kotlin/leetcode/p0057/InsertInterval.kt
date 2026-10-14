@@ -32,6 +32,30 @@ package leetcode.p0057
  */
 class Solution {
     fun insert(intervals: Array<IntArray>, newInterval: IntArray): Array<IntArray> {
-        TODO("Implement solution")
+        val mergedIntervals = mutableListOf<IntArray>()
+
+        // Copy intervals strictly before the new interval
+        var i = 0
+        while (i < intervals.size && intervals[i][1] < newInterval[0]) {
+            mergedIntervals.add(intervals[i])
+            i++
+        }
+
+        // Merge the found interval and continue until we move out of a merged interval
+        while (i < intervals.size && intervals[i][0] <= newInterval[1]) {
+            newInterval[0] = minOf(newInterval[0], intervals[i][0])
+            newInterval[1] = maxOf(newInterval[1], intervals[i][1])
+            i++
+        }
+
+        mergedIntervals.add(newInterval)
+
+        // Add the rest of the intervals
+        while (i < intervals.size) {
+            mergedIntervals.add(intervals[i])
+            i++
+        }
+
+        return mergedIntervals.toTypedArray()
     }
 }
