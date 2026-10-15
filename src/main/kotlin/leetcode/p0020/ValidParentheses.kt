@@ -27,7 +27,19 @@ package leetcode.p0020
  * [LeetCode 20: Valid Parentheses](https://leetcode.com/problems/valid-parentheses/)
  */
 class Solution {
+
     fun isValid(s: String): Boolean {
-        TODO("Implement solution")
+        val stack = java.util.ArrayDeque<Char>()
+
+        for (symbol in s) {
+            when (symbol) {
+                '(' -> stack.addLast(')')
+                '[' -> stack.addLast(']')
+                '{' -> stack.addLast('}')
+                else -> if (stack.pollLast() != symbol) return false
+            }
+        }
+
+        return stack.isEmpty()
     }
 }
