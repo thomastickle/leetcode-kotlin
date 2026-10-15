@@ -34,18 +34,18 @@ package leetcode.p0452
  */
 class Solution {
     fun findMinArrowShots(points: Array<IntArray>): Int {
-        points.sortBy { it[1] }
+        points.sortWith { a,b, -> a[1].compareTo(b[1]) }
 
-        var arrows = 1
-        var previous = points[0][1]
+        var arrowCount = 1
+        var arrowPosition = points[0][1]
 
         for (i in 1 until points.size) {
-            if (points[i][0] > previous) {
-                previous = points[i][1]
-                arrows++
+            if (points[i][0] > arrowPosition) {
+                arrowPosition = points[i][1]
+                arrowCount++
             }
         }
 
-        return arrows
+        return arrowCount
     }
 }
