@@ -41,19 +41,24 @@ package leetcode.p0155
  * [LeetCode 155: Min Stack](https://leetcode.com/problems/min-stack/)
  */
 class MinStack {
+    private class StackEntry(val value: Int, val lowestValue: Int)
+    private val stack = ArrayList<StackEntry>()
+
     fun push(`val`: Int) {
-        TODO("Implement solution")
+        val lowest = if (stack.isEmpty()) `val` else minOf(`val`, stack.last().lowestValue)
+        val stackEntry = StackEntry(`val`, lowest)
+        stack.add(stackEntry)
     }
 
     fun pop() {
-        TODO("Implement solution")
+        stack.removeLast()
     }
 
     fun top(): Int {
-        TODO("Implement solution")
+        return stack.last().value
     }
 
     fun getMin(): Int {
-        TODO("Implement solution")
+        return stack.last().lowestValue
     }
 }
