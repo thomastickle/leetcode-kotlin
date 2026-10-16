@@ -43,6 +43,24 @@ package leetcode.p0071
  */
 class Solution {
     fun simplifyPath(path: String): String {
-        TODO("Implement solution")
+        val splitPath = path.split('/')
+        val stack = ArrayList<String>()
+
+        for (current in splitPath) {
+            when (current) {
+                "", "." -> continue
+                ".." -> if (stack.isNotEmpty()) stack.removeLast()
+                else -> stack.add(current)
+            }
+        }
+
+        return if (stack.isEmpty()) "/" else {
+            val result = StringBuilder()
+            for (i in stack) {
+                result.append('/')
+                result.append(i)
+            }
+            result.toString()
+        }
     }
 }
